@@ -14,6 +14,13 @@ export const HomePage = () => {
       setFilter("");
       setFilteredList("")
    }
+   
+   useEffect(() => {
+      const filteredProducts = productList.filter(product => product.name.toLowerCase().includes(filter.toLowerCase()) || 
+      product.category.toLowerCase().includes(filter.toLowerCase()));
+
+      filter ? setFilteredList(filteredProducts) : null
+   }, [filter])
 
    useEffect(() => {
       const getProducts = async () => {
@@ -25,26 +32,20 @@ export const HomePage = () => {
             console.log(error)
          }
       }
-
+      
       getProducts()
    }, [])
 
-   useEffect(() => {
-      const filteredProducts = productList.filter(product => product.name.toLowerCase().includes(filter.toLowerCase()) || 
-      product.category.toLowerCase().includes(filter.toLowerCase()));
-
-      filter ? setFilteredList(filteredProducts) : null
-   }, [filter])
-
-   const products = filteredList ? filteredList : productList
-
    // useEffect montagem - carrega os produtos da API e joga em productList - FEITO
+   // filtro de busca - FEITO
+   
    // useEffect atualização - salva os produtos no localStorage (carregar no estado)
    // adição, exclusão, e exclusão geral do carrinho
    // renderizações condições e o estado para exibir ou não o carrinho
-   // filtro de busca
    // estilizar tudo com sass de forma responsiva
 
+   const products = filteredList ? filteredList : productList
+   
    return (
       <>
          <Header setFilter={setFilter}/>

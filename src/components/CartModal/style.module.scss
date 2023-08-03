@@ -1,0 +1,41 @@
+.modalOverlay {
+    width: 100%;
+    background: var(--color-black-25);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    inset: 0;
+}
+
+.modalContainer {
+    width: 100%;
+    max-width: 31.25rem;
+    max-height: 60vh;
+    background: var(--color-white);
+}
+
+.modalHeader {
+    padding: 0 22px;
+    background: var(--color-primary);
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & > h2 {
+        color: var(--color-white);
+    }
+
+    button {
+        color: var(--color-white-50);
+        background: transparent;
+
+        &:hover {
+            color: var(--color-white);
+        }
+    }
+}
+
