@@ -1,0 +1,10 @@
+.productList {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(20px, 5vw ,55px);
+
+    @media (max-width: 642px) {
+        overflow-x: scroll;
+    }
+}

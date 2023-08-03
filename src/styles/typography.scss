@@ -32,7 +32,8 @@ p, span {
     font-weight: 400;
     line-height: 1.5rem;
     
-    &.strong {
+    &.price{
+        color: var(--color-primary);
         font-weight: 600;
     }
 }
