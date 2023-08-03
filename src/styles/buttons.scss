@@ -17,7 +17,6 @@ button {
 
 .buttonPrimary {
     background: var(--color-primary);
-    display: flex;
     height: 2.5rem;
     padding: 0px 20px;
 
@@ -27,5 +26,25 @@ button {
 
     &:hover {
         filter: brightness(1.2);
+    }
+}
+
+.filter-button {
+    height: 2.5rem;
+    padding: 0px 20px;
+    margin-bottom: 20px;
+
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        background-color: var(--color-secondary);
+    }
+
+    svg {
+        position: relative;
+        right: -8px;
     }
 }

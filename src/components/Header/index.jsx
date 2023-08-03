@@ -3,8 +3,14 @@ import { useState } from "react";
 import Logo from "../../assets/Logo.svg";
 import { MdSearch, MdShoppingCart } from "react-icons/md";
 
-export const Header = () => {
+export const Header = ({ setFilter }) => {
    const [value, setValue] = useState("");
+
+   const searchValue = (e) => {
+      e.preventDefault();
+      value !== "" ? setFilter(value) : null
+      setValue("");
+   }
 
    return (
       <header className={styles.header}>
@@ -15,7 +21,7 @@ export const Header = () => {
                   <MdShoppingCart size={27} />
                   <span className="strong">0</span>
                </button>
-               <form>
+               <form onSubmit={searchValue}>
                   <input className="headline light"
                      type="text"
                      value={value}
