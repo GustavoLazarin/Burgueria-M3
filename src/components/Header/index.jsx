@@ -11,7 +11,7 @@ export const Header = () => {
          <div className="container">
             <img src={Logo} alt="Logo Kenzie Burguer" />
             <div className={styles.inputsBox}>
-               <button className="cartButton">
+               <button className={styles.cartButton}>
                   <MdShoppingCart size={27} />
                   <span className="strong">0</span>
                </button>
