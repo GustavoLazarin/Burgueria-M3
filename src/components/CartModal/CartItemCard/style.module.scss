@@ -1,0 +1,29 @@
+.cardContainer {
+    height: 5rem;
+
+    display: flex;
+    justify-content: space-between;
+
+    .cardContent {
+        display: flex;
+        gap: 10px;
+
+        img {
+            height: 100%;
+            padding: 13px;
+            background: var(--color-gray-1);
+            border-radius: 5px;
+        }
+    }
+
+    .deleteButton {
+        height: max-content;
+        padding: 0;
+        background: none;
+        color: var(--color-gray-2);
+
+        &:hover {
+            color: var(--color-secondary);
+        }
+    }
+}

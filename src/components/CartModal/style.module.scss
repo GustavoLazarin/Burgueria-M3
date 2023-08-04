@@ -14,12 +14,15 @@
     width: 100%;
     max-width: 31.25rem;
     max-height: 60vh;
+    border-radius: 5px;
     background: var(--color-white);
 }
 
 .modalHeader {
+    height: 3.375rem;
     padding: 0 22px;
     background: var(--color-primary);
+    border-radius: 5px 5px 0 0;
     
     display: flex;
     align-items: center;
@@ -30,8 +33,10 @@
     }
 
     button {
+        height: fit-content;
         color: var(--color-white-50);
         background: transparent;
+        padding: 0;
 
         &:hover {
             color: var(--color-white);
@@ -39,3 +44,46 @@
     }
 }
 
+.modalContent {
+    padding: 20px;
+    // overflow-y: scroll;
+
+    ul {
+        max-height: 280px;
+        overflow-y: scroll;
+
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .modalFooter {
+        height: 120px;
+        border-top: 2px solid var(--color-gray-1);
+        margin-top: 18px;
+        padding-top: 15px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .priceAmount {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            &:hover {
+                background: var(--color-secondary);
+            }
+
+            &:disabled {
+                cursor: default;
+                
+                &:hover {
+                    background-color: var(--color-gray-1);
+                }
+            }
+        }
+    }
+}

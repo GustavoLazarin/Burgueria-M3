@@ -20,11 +20,13 @@
         }
 
         form {
-            max-width: -webkit-fill-available !important;
+            width: auto !important;
+            max-width: inherit !important;
             margin: 0 1.5rem;
 
             position: absolute;
             left: 0;
+            right: 0;
             bottom: 20px;
         }
 
@@ -42,8 +44,7 @@
 
     form {
         display: flex;
-        width: 100%;
-        max-width: 365px;
+        width: 365px;
         height: 60px;
         padding: 0px 10px 0px 15px;
         justify-content: space-between;

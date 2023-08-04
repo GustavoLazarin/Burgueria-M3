@@ -4,6 +4,7 @@ button {
     border-radius: 8px;
     background: var(--color-gray-2);
     color: var(--color-white);
+    font-size: 1rem;
     transition: .3s;
 
     &:hover {
@@ -12,6 +13,7 @@ button {
 
     &.md {
         height: 2.5rem;
+        font-size: 0.875rem;
     }
 }
 

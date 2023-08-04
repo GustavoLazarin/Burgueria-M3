@@ -2,7 +2,7 @@ import styles from "./style.module.scss"
 import { ProductCard } from "./ProductCard";
 import { MdDelete } from "react-icons/md";
 
-export const ProductList = ({ productList, filter, cleanFilter }) => {
+export const ProductList = ({ productList, filter, cleanFilter, addItemToCart }) => {
    return (
       <div className="container">
          {filter? (
@@ -15,7 +15,7 @@ export const ProductList = ({ productList, filter, cleanFilter }) => {
          {productList.length > 0 ? 
          (<ul className={styles.productList}>
             {productList.map((product) => (
-               <ProductCard key={product.id} product={product} />
+               <ProductCard key={product.id} product={product} addToCart={addItemToCart} />
             ))}
          </ul>) : (<p>Nenhum resultado encontrado...</p>) }
          

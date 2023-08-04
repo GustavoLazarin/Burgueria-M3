@@ -3,7 +3,7 @@ import { useState } from "react";
 import Logo from "../../assets/Logo.svg";
 import { MdSearch, MdShoppingCart } from "react-icons/md";
 
-export const Header = ({ setFilter }) => {
+export const Header = ({ setFilter, handleModal }) => {
    const [value, setValue] = useState("");
 
    const searchValue = (e) => {
@@ -17,8 +17,8 @@ export const Header = ({ setFilter }) => {
          <div className="container">
             <img src={Logo} alt="Logo Kenzie Burguer" />
             <div className={styles.inputsBox}>
-               <button className={styles.cartButton}>
-                  <MdShoppingCart size={27} />
+               <button className={styles.cartButton} onClick={() => handleModal(true)}>
+                  <MdShoppingCart size={27}/>
                   <span className="strong">0</span>
                </button>
                <form onSubmit={searchValue}>

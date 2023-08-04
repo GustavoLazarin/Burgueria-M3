@@ -9,6 +9,7 @@ export const HomePage = () => {
    const [cartList, setCartList] = useState([]);
    const [filter, setFilter] = useState("");
    const [filteredList, setFilteredList] = useState("");
+   const [modalOpen, setModalOpen] = useState(false)
 
    const cleanFilter = () => {
       setFilter("");
@@ -33,25 +34,34 @@ export const HomePage = () => {
          }
       }
       
-      getProducts()
+      getProducts()     
    }, [])
+
+   const addItemToCart = (item) => {
+      setCartList([...cartList, item]);
+   }
+
+   const removeItemToCart = (itemId) => {
+      const newCartList = cartList.filter(item => item.id !== itemId);
+      setCartList(newCartList);
+   }
 
    // useEffect montagem - carrega os produtos da API e joga em productList - FEITO
    // filtro de busca - FEITO
+   // renderizações condições e o estado para exibir ou não o carrinho - FEITO
    
-   // useEffect atualização - salva os produtos no localStorage (carregar no estado)
    // adição, exclusão, e exclusão geral do carrinho
-   // renderizações condições e o estado para exibir ou não o carrinho
+   // useEffect atualização - salva os produtos no localStorage (carregar no estado)
    // estilizar tudo com sass de forma responsiva
 
    const products = filteredList ? filteredList : productList
    
    return (
       <>
-         <Header setFilter={setFilter}/>
+         <Header setFilter={setFilter} handleModal={setModalOpen}/>
          <main>
-            <ProductList productList={products} filter={filter} cleanFilter={cleanFilter} />
-            <CartModal cartList={cartList} />
+            <ProductList productList={products} filter={filter} cleanFilter={cleanFilter} addItemToCart={addItemToCart} />
+            {modalOpen ? <CartModal cartList={cartList} setCartList={setCartList} handleModal={setModalOpen} removeItem={removeItemToCart}/> : null}
          </main>
       </>
    );
