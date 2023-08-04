@@ -8,7 +8,7 @@ export const ProductList = ({ productList, filter, cleanFilter, addItemToCart })
          {filter? (
             <div className="flex">
                <span>Exibindo resultado de busca por:</span>
-               <button className="filter-button" onClick={cleanFilter}>{filter}<MdDelete size={16}/></button>
+               <button className="filter-button" title="Remover filtro" onClick={cleanFilter}>{filter}<MdDelete size={16}/></button>
             </div>
          ) : null}
 

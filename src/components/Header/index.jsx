@@ -3,7 +3,7 @@ import { useState } from "react";
 import Logo from "../../assets/Logo.svg";
 import { MdSearch, MdShoppingCart } from "react-icons/md";
 
-export const Header = ({ setFilter, handleModal }) => {
+export const Header = ({ cartList, setFilter, handleModal }) => {
    const [value, setValue] = useState("");
 
    const searchValue = (e) => {
@@ -19,7 +19,7 @@ export const Header = ({ setFilter, handleModal }) => {
             <div className={styles.inputsBox}>
                <button className={styles.cartButton} onClick={() => handleModal(true)}>
                   <MdShoppingCart size={27}/>
-                  <span className="strong">0</span>
+                  <span className="strong">{cartList.reduce((prev) => prev + 1, 0)}</span>
                </button>
                <form onSubmit={searchValue}>
                   <input className="headline light"

@@ -3,14 +3,21 @@ import { CartModal } from "../../components/CartModal";
 import { Header } from "../../components/Header";
 import { ProductList } from "../../components/ProductList";
 import { api } from "../../services/api";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { Skeleton } from "../../components/Skeleton";
 
 export const HomePage = () => {
+   const [isLoading, setIsLoading] = useState(false);
    const [productList, setProductList] = useState([]);
-   const [cartList, setCartList] = useState([]);
+   const savedCart = localStorage.getItem("@BurguerKenzie:carrinho");
    const [filter, setFilter] = useState("");
    const [filteredList, setFilteredList] = useState("");
    const [modalOpen, setModalOpen] = useState(false)
-
+   const [cartList, setCartList] = useState(
+      savedCart ? JSON.parse(savedCart) : []
+   );
+   
    const cleanFilter = () => {
       setFilter("");
       setFilteredList("")
@@ -26,19 +33,31 @@ export const HomePage = () => {
    useEffect(() => {
       const getProducts = async () => {
          try {
+            setIsLoading(true);
             const {data} = await api.get();
-            
             setProductList(data);
          } catch(error) {
             console.log(error)
          }
+         finally {
+            setIsLoading(false);
+         }
       }
       
-      getProducts()     
+      getProducts()
    }, [])
 
+   useEffect(() => {
+      localStorage.setItem("@BurguerKenzie:carrinho", JSON.stringify(cartList));
+   }, [cartList])
+
    const addItemToCart = (item) => {
-      setCartList([...cartList, item]);
+      const itemExist = cartList.find(cartItem => cartItem.id == item.id);
+
+      itemExist ? toast.error("Esse item já está no carrinho!",{
+         position: "bottom-right",
+         autoClose: 3000
+      }) : setCartList([item, ...cartList]);
    }
 
    const removeItemToCart = (itemId) => {
@@ -46,23 +65,16 @@ export const HomePage = () => {
       setCartList(newCartList);
    }
 
-   // useEffect montagem - carrega os produtos da API e joga em productList - FEITO
-   // filtro de busca - FEITO
-   // renderizações condições e o estado para exibir ou não o carrinho - FEITO
-   
-   // adição, exclusão, e exclusão geral do carrinho
-   // useEffect atualização - salva os produtos no localStorage (carregar no estado)
-   // estilizar tudo com sass de forma responsiva
-
    const products = filteredList ? filteredList : productList
    
    return (
       <>
-         <Header setFilter={setFilter} handleModal={setModalOpen}/>
+         <Header cartList={cartList} setFilter={setFilter} handleModal={setModalOpen} />
          <main>
-            <ProductList productList={products} filter={filter} cleanFilter={cleanFilter} addItemToCart={addItemToCart} />
-            {modalOpen ? <CartModal cartList={cartList} setCartList={setCartList} handleModal={setModalOpen} removeItem={removeItemToCart}/> : null}
+            {!isLoading ? <ProductList productList={products} filter={filter} cleanFilter={cleanFilter} addItemToCart={addItemToCart} /> : <Skeleton />}
+            {modalOpen ? <CartModal cartList={cartList} setCartList={setCartList} handleModal={setModalOpen} removeItem={removeItemToCart} /> : null}
          </main>
+         <ToastContainer />
       </>
    );
 };
