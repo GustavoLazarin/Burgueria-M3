@@ -12,7 +12,6 @@ export const HomePage = () => {
    const [productList, setProductList] = useState([]);
    const savedCart = localStorage.getItem("@BurguerKenzie:carrinho");
    const [filter, setFilter] = useState("");
-   const [filteredList, setFilteredList] = useState("");
    const [modalOpen, setModalOpen] = useState(false)
    const [cartList, setCartList] = useState(
       savedCart ? JSON.parse(savedCart) : []
@@ -20,15 +19,7 @@ export const HomePage = () => {
    
    const cleanFilter = () => {
       setFilter("");
-      setFilteredList("")
    }
-   
-   useEffect(() => {
-      const filteredProducts = productList.filter(product => product.name.toLowerCase().includes(filter.toLowerCase()) || 
-      product.category.toLowerCase().includes(filter.toLowerCase()));
-
-      filter ? setFilteredList(filteredProducts) : null
-   }, [filter])
 
    useEffect(() => {
       const getProducts = async () => {
@@ -65,7 +56,9 @@ export const HomePage = () => {
       setCartList(newCartList);
    }
 
-   const products = filteredList ? filteredList : productList
+   const products = filter ? productList.filter(product => product.name.toLowerCase().includes(filter.toLowerCase()) || 
+   product.category.toLowerCase().includes(filter.toLowerCase()))
+    : productList
    
    return (
       <>
